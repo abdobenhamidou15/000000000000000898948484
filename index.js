@@ -6,7 +6,6 @@ const allowedUsers = config.allowedUsers;
 const roles = config.roleToDisco;
 
 disco.on("ready", () => {
-    disco.user.setPresence({ game: { name: `-help | -inv` }, type: 0 });
     console.log("Discord role bot online! Created by i am toast.");
 });
 
@@ -17,32 +16,33 @@ disco.on("message", message => {
     roles.forEach((role) => {
       let theRole = message.guild.roles.find("name", role);
       theRole.edit({color: random}).catch(e => {
-        return message.channel.sendMessage(":x: **Error:** The role you specified in the `config.json` is either not a role on this server, or his a role higher than the highest role that I have.");
+        return message.channel.sendMessage("where this fucking role");
       });
     });
   }
 
-  if(message.content.startsWith(prefix + "startdisco")) {
+  if(message.content.startsWith(prefix + "rstart")) {
     if(allowedUsers.includes(message.author.id)) {
     setInterval(() => { discoRole(); }, config.ms);
-    message.channel.sendMessage("```css\nDiscoing...```");
-    message.channel.sendMessage("Please make sure you read the README, you could get IP banned from discord because of ratelimits.");
+    message.channel.sendMessage("rainbow color has been started");
   } else {
-    message.reply(`You do not have permission to disco. If you have downloaded this bot off of github please go to the config.json and add your user ID to the "allowedUsers" value.`);
+    message.reply(`:middle_finger: a fuck you`);
   }
 } else
 
-if(message.content.startsWith(prefix + "stopdisco")) {
+if(message.content.startsWith(prefix + "rstop")) {
   if(allowedUsers.includes(message.author.id)) {
-  message.channel.sendMessage("I've stopped discoing.");
+  message.channel.sendMessage("rainbow color has been stopped");
   setTimeout(() => { console.log(process.exit(0)); }, 300);
 } else {
-  message.reply(`You do not have permission to disco. If you have downloaded this bot off of github please go to the config.json and add your user ID to the "allowedUsers" value.`);
+  message.reply(`a fuck you `);
   }
 }
 
 console.log(message.author.id);
 
 });
+
+
 
 disco.login(process.env.token);
